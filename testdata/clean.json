@@ -1,0 +1,60 @@
+{
+  "operations": [
+    {
+      "id": "op-1-deposit",
+      "kind": "deposit",
+      "at": "2026-01-02T09:00:00Z",
+      "ref": "chain:deposit:1",
+      "legs": [
+        {"id": "l1", "account": {"id": "chain-tron", "kind": "external"}, "amount": {"value": "-500", "currency": "USDT"}},
+        {"id": "l2", "account": {"id": "acct-user-1", "kind": "user"}, "amount": {"value": "500", "currency": "USDT"}}
+      ]
+    },
+    {
+      "id": "op-2-payout",
+      "kind": "withdrawal",
+      "at": "2026-01-02T10:00:00Z",
+      "ref": "withdrawal:1",
+      "legs": [
+        {"id": "l1", "account": {"id": "acct-user-1", "kind": "user"}, "amount": {"value": "-200", "currency": "USDT"}},
+        {"id": "l2", "account": {"id": "acct-fee", "kind": "fee"}, "amount": {"value": "2", "currency": "USDT"}, "role": "fee"},
+        {"id": "l3", "account": {"id": "chain-tron", "kind": "external"}, "amount": {"value": "198", "currency": "USDT"}}
+      ]
+    }
+  ],
+
+  "opening": [
+    {
+      "account": {"id": "acct-user-1", "kind": "user"},
+      "available": {"value": "0", "currency": "USDT"},
+      "held": {"value": "0", "currency": "USDT"}
+    },
+    {
+      "account": {"id": "acct-fee", "kind": "fee"},
+      "available": {"value": "0", "currency": "USDT"},
+      "held": {"value": "0", "currency": "USDT"}
+    }
+  ],
+
+  "records": [
+    {
+      "id": "tx-deposit", "ref": "chain:deposit:1", "at": "2026-01-02T09:00:00Z",
+      "amount": {"value": "500", "currency": "USDT"},
+      "counterparty": "addr-e5f6", "chain": "tron", "confirmations": 40
+    },
+    {
+      "id": "tx-payout-1", "ref": "withdrawal:1", "at": "2026-01-02T10:00:00Z",
+      "amount": {"value": "-198", "currency": "USDT"},
+      "counterparty": "addr-a1b2", "chain": "tron", "confirmations": 40
+    }
+  ],
+
+  "finality": {
+    "tron": {"depth": 20}
+  },
+
+  "options": {
+    "zone": "Europe/Berlin",
+    "duplicate_window": "5m"
+  }
+}

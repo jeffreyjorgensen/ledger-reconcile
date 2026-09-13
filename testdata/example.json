@@ -1,0 +1,127 @@
+{
+  "operations": [
+    {
+      "id": "op-1-deposit",
+      "kind": "deposit",
+      "at": "2026-01-02T09:00:00Z",
+      "ref": "chain:deposit:1",
+      "legs": [
+        {"id": "l1", "account": {"id": "chain-tron", "kind": "external"}, "amount": {"value": "-500", "currency": "USDT"}},
+        {"id": "l2", "account": {"id": "acct-user-1", "kind": "user"}, "amount": {"value": "500", "currency": "USDT"}}
+      ]
+    },
+    {
+      "id": "op-2-payout",
+      "kind": "withdrawal",
+      "at": "2026-01-02T10:00:00Z",
+      "ref": "withdrawal:1",
+      "legs": [
+        {"id": "l1", "account": {"id": "acct-user-1", "kind": "user"}, "amount": {"value": "-200", "currency": "USDT"}},
+        {"id": "l2", "account": {"id": "chain-tron", "kind": "external"}, "amount": {"value": "200", "currency": "USDT"}}
+      ]
+    },
+    {
+      "id": "op-3-payout",
+      "kind": "withdrawal",
+      "at": "2026-01-02T10:03:00Z",
+      "ref": "withdrawal:2",
+      "legs": [
+        {"id": "l1", "account": {"id": "acct-user-1", "kind": "user"}, "amount": {"value": "-200", "currency": "USDT"}},
+        {"id": "l2", "account": {"id": "chain-tron", "kind": "external"}, "amount": {"value": "200", "currency": "USDT"}}
+      ]
+    },
+    {
+      "id": "op-4-payout",
+      "kind": "withdrawal",
+      "at": "2026-01-02T10:06:00Z",
+      "ref": "withdrawal:3",
+      "legs": [
+        {"id": "l1", "account": {"id": "acct-user-1", "kind": "user"}, "amount": {"value": "-200", "currency": "USDT"}},
+        {"id": "l2", "account": {"id": "chain-tron", "kind": "external"}, "amount": {"value": "200", "currency": "USDT"}}
+      ]
+    },
+    {
+      "id": "op-5-sweep",
+      "kind": "transfer",
+      "at": "2026-01-02T11:00:00Z",
+      "ref": "chain:sweep:1",
+      "legs": [
+        {"id": "l1", "account": {"id": "acct-treasury-hot", "kind": "system"}, "amount": {"value": "-50", "currency": "USDT"}},
+        {"id": "l2", "account": {"id": "acct-treasury-cold", "kind": "system"}, "amount": {"value": "50", "currency": "USDT"}}
+      ]
+    }
+  ],
+
+  "records": [
+    {
+      "id": "tx-deposit", "ref": "chain:deposit:1", "at": "2026-01-02T09:00:00Z",
+      "amount": {"value": "500", "currency": "USDT"},
+      "chain": "tron", "confirmations": 4
+    },
+    {
+      "id": "tx-payout-1", "ref": "withdrawal:1", "at": "2026-01-02T10:00:00Z",
+      "amount": {"value": "-200", "currency": "USDT"},
+      "counterparty": "addr-a1b2", "chain": "tron", "confirmations": 40
+    },
+    {
+      "id": "tx-payout-2", "ref": "withdrawal:2", "at": "2026-01-02T10:03:00Z",
+      "amount": {"value": "-200", "currency": "USDT"},
+      "counterparty": "addr-a1b2", "chain": "tron", "confirmations": 40
+    },
+    {
+      "id": "tx-payout-3", "ref": "withdrawal:3", "at": "2026-01-02T10:06:00Z",
+      "amount": {"value": "-200", "currency": "USDT"},
+      "counterparty": "addr-c3d4", "chain": "tron", "confirmations": 40
+    },
+    {
+      "id": "tx-sweep", "ref": "chain:sweep:1", "at": "2026-01-02T11:00:00Z",
+      "amount": {"value": "50", "currency": "USDT"},
+      "chain": "tron", "confirmations": 40
+    }
+  ],
+
+  "opening": [
+    {
+      "account": {"id": "acct-user-1", "kind": "user"},
+      "available": {"value": "0", "currency": "USDT"},
+      "held": {"value": "0", "currency": "USDT"}
+    },
+    {
+      "account": {"id": "acct-treasury-hot", "kind": "system"},
+      "available": {"value": "500", "currency": "USDT"},
+      "held": {"value": "0", "currency": "USDT"}
+    },
+    {
+      "account": {"id": "acct-treasury-cold", "kind": "system"},
+      "available": {"value": "0", "currency": "USDT"},
+      "held": {"value": "0", "currency": "USDT"}
+    }
+  ],
+
+  "balances": [
+    {
+      "account": {"id": "acct-user-2", "kind": "user"},
+      "available": {"value": "12", "currency": "USDT"},
+      "held": {"value": "0", "currency": "USDT"},
+      "frozen": {"value": "4", "currency": "USDT"}
+    }
+  ],
+
+  "assets": {
+    "USDT": {
+      "networks": ["tron", "ethereum"],
+      "minimum_withdrawal": {"value": "10", "currency": "USDT"},
+      "reserve": {"value": "5", "currency": "USDT"}
+    }
+  },
+  "networks": ["tron"],
+
+  "finality": {
+    "tron": {"depth": 20}
+  },
+
+  "options": {
+    "zone": "Europe/Berlin",
+    "duplicate_window": "5m"
+  }
+}
