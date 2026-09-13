@@ -1,0 +1,63 @@
+version: "2"
+
+# The linters here are the ones whose findings would be defects in a library
+# about money. Nothing is enabled for the sake of a longer list: every rule
+# that stays on has to be one whose violation a reader would call a bug.
+
+linters:
+  default: standard
+  enable:
+    # An ignored error in this package means a discrepancy that was found and
+    # thrown away, or a parse that silently produced zero.
+    - errcheck
+    - errorlint
+
+    # Money arithmetic that is never read, or a branch that cannot be reached.
+    - unused
+    - ineffassign
+    - staticcheck
+    - govet
+
+    # A function long enough to hide a branch is long enough to hide a bug,
+    # and the promise here is that the code can be read in an evening.
+    - funlen
+    - gocognit
+    - cyclop
+
+    # Shadowing a currency or an amount is how the wrong figure gets reported.
+    - predeclared
+    - copyloopvar
+
+    # Findings are compared by content; a fragile string comparison or a
+    # forgotten sort would make that untrue.
+    - gocritic
+    - misspell
+    - revive
+
+  settings:
+    funlen:
+      lines: 60
+      statements: 40
+      ignore-comments: true
+    gocognit:
+      min-complexity: 20
+    cyclop:
+      max-complexity: 15
+    misspell:
+      locale: UK
+    revive:
+      rules:
+        - name: exported
+          arguments: [checkPrivateReceivers]
+        - name: package-comments
+
+  exclusions:
+    rules:
+      # Table-driven tests are long by construction, and their length is the
+      # coverage rather than complexity hiding in a corner.
+      - path: _test\.go
+        linters: [funlen, gocognit, cyclop, errcheck]
+
+formatters:
+  enable:
+    - gofmt

@@ -1,0 +1,66 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # Lets the checks be run against a commit on demand, from the Actions tab or
+  # `gh workflow run ci.yml`, without pushing something to provoke them.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The floor declared in go.mod, and whatever is current. A library
+        # states a minimum version; this is what makes the statement true.
+        go: ['1.24', 'stable']
+    name: go ${{ matrix.go }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+          check-latest: true
+
+      # The same targets that are available locally, run in the same order.
+      # A check that only exists here is a check nobody runs while working.
+      - name: gofmt
+        run: make fmt
+
+      - name: vet
+        run: make vet
+
+      # No float on any path a monetary amount travels.
+      - name: money
+        run: make money
+
+      - name: test
+        run: make test
+
+      - name: size
+        run: make size
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Both versions are pinned, and they have to be pinned together: the
+      # linter carries its own type checker, so a Go newer than the one the
+      # linter was built with makes it fail on the standard library rather
+      # than on this code. Pinning to the floor go.mod declares keeps the
+      # pair consistent and the job deterministic.
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+      # v9 installs golangci-lint v2, which is the schema .golangci.yml is
+      # written in.
+      - uses: golangci/golangci-lint-action@v9
+        with:
+          version: v2.12.2
