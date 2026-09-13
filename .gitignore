@@ -1,0 +1,6 @@
+/ledger-reconcile
+/dist/
+*.test
+.DS_Store
+.idea/
+coverage.out
