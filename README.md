@@ -9,7 +9,7 @@ and reports where the two stop agreeing — naming the failure mode, the records
 that produced the finding, and the arithmetic that failed.
 
 It is the implementation behind the article
-[Fourteen Ways Reconciliation Breaks](https://jeffreyjorgensen.dev/teardown).
+[Fourteen Ways Reconciliation Breaks](https://jeffreyjorgensen.dev/teardown?from=github-ledger).
 The article states the problem; this detects it. Every finding carries the
 article's own number for the mode it matched, so a finding can be read next to
 the prose that explains what it means.
@@ -20,7 +20,7 @@ the prose that explains what it means.
      currency:   USDT
      arithmetic: after op-4-payout: available = -100, held = 0. Covering this would have needed a hold of 100 placed before the earlier operation settled
      leg l1:     acct-user-1 (user, principal) -200 USDT
-     see:        https://jeffreyjorgensen.dev/teardown#i4
+     see:        https://jeffreyjorgensen.dev/teardown?from=github-ledger#i4
 ```
 
 **Thirteen of the fourteen modes are implemented.** The fourteenth is not, and
@@ -36,20 +36,20 @@ library.
 
 | # | Mode | Detector | What it needs beyond movements |
 | --- | --- | --- | --- |
-| [01](https://jeffreyjorgensen.dev/teardown#i1) | More left the account than the payment said | `FeeConventions` | the declared amount |
-| [02](https://jeffreyjorgensen.dev/teardown#i2) | The recipient was paid twice | `Duplicates` | a counterparty and a window, for the uncertain half |
-| [03](https://jeffreyjorgensen.dev/teardown#i3) | The balance is there and cannot be withdrawn | `Configure` | asset rules, supported networks |
-| [04](https://jeffreyjorgensen.dev/teardown#i4) | The balance went negative despite the check | `Replay` | opening balances |
-| [05](https://jeffreyjorgensen.dev/teardown#i5) | Daily reports don't add up to the monthly one | `Daily` | the reporting time zone |
-| [06](https://jeffreyjorgensen.dev/teardown#i6) | Turnover doubled out of nowhere | `Reversals` | a link from the refund to what it reverses |
-| [07](https://jeffreyjorgensen.dev/teardown#i7) | One transaction, three different figures | `Rates` | dated quotes, a counter currency |
-| [08](https://jeffreyjorgensen.dev/teardown#i8) | Yesterday's export names the source differently | **not covered** | — |
-| [09](https://jeffreyjorgensen.dev/teardown#i9) | A confirmed deposit disappeared | `Finality` | a finality rule per chain |
-| [10](https://jeffreyjorgensen.dev/teardown#i10) | One transaction is not one operation | `Batches` | which transaction carried which operations |
-| [11](https://jeffreyjorgensen.dev/teardown#i11) | Reconciliation fails though every entry is right | `Boundary` | external records |
-| [12](https://jeffreyjorgensen.dev/teardown#i12) | The cost of a payout changed after sending | `FeeEstimates` | the fee quoted before sending |
-| [13](https://jeffreyjorgensen.dev/teardown#i13) | The balance exceeds what can be withdrawn | `Configure` | reserves, freezes, minimums |
-| [14](https://jeffreyjorgensen.dev/teardown#i14) | The payout went out and cost nothing | `Conserve` | — |
+| [01](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i1) | More left the account than the payment said | `FeeConventions` | the declared amount |
+| [02](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i2) | The recipient was paid twice | `Duplicates` | a counterparty and a window, for the uncertain half |
+| [03](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i3) | The balance is there and cannot be withdrawn | `Configure` | asset rules, supported networks |
+| [04](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i4) | The balance went negative despite the check | `Replay` | opening balances |
+| [05](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i5) | Daily reports don't add up to the monthly one | `Daily` | the reporting time zone |
+| [06](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i6) | Turnover doubled out of nowhere | `Reversals` | a link from the refund to what it reverses |
+| [07](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i7) | One transaction, three different figures | `Rates` | dated quotes, a counter currency |
+| [08](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i8) | Yesterday's export names the source differently | **not covered** | — |
+| [09](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i9) | A confirmed deposit disappeared | `Finality` | a finality rule per chain |
+| [10](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i10) | One transaction is not one operation | `Batches` | which transaction carried which operations |
+| [11](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i11) | Reconciliation fails though every entry is right | `Boundary` | external records |
+| [12](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i12) | The cost of a payout changed after sending | `FeeEstimates` | the fee quoted before sending |
+| [13](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i13) | The balance exceeds what can be withdrawn | `Configure` | reserves, freezes, minimums |
+| [14](https://jeffreyjorgensen.dev/teardown?from=github-ledger#i14) | The payout went out and cost nothing | `Conserve` | — |
 
 ### Why 08 is not covered
 
