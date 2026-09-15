@@ -20,7 +20,7 @@ the prose that explains what it means.
      currency:   USDT
      arithmetic: after op-4-payout: available = -100, held = 0. Covering this would have needed a hold of 100 placed before the earlier operation settled
      leg l1:     acct-user-1 (user, principal) -200 USDT
-     see:        https://jeffreyjorgensen.dev/teardown?from=github-ledger#i4
+     see:        https://jeffreyjorgensen.dev/teardown#i4
 ```
 
 **Thirteen of the fourteen modes are implemented.** The fourteenth is not, and
